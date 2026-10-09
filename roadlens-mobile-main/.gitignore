@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+backend/.venv/
+backend/data/
+
+# Flutter/Dart generated output
+mobile/.dart_tool/
+mobile/.flutter-plugins-dependencies
+mobile/build/
+mobile/coverage/
+mobile/.idea/
+mobile/*.iml
+
+# Workspace-local SDKs and dependency caches
+mobile/.flutter-build/
+mobile/.android-sdk-build/
+mobile/.build-cache/
+mobile/.pub-cache-build/
+mobile/.gradle-cache-build/
+mobile/android/.gradle/
+mobile/android/build/
+mobile/android/local.properties
+
+# Release signing and secrets
+*.jks
+*.keystore
+key.properties
+.env
+.env.*
+!.env.example
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.log
+*.hprof
+*.swp

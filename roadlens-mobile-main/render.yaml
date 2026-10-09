@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: roadlens-api
+    runtime: python
+    plan: free
+    buildCommand: python -m pip install --upgrade pip && python -m pip install -r backend/requirements.txt
+    startCommand: python -m uvicorn backend.server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: DEBUG_INFERENCE
+        value: "false"
+      # The free service has no /var/data disk. These paths keep the service
+      # writable, but remain ephemeral until a persistent disk is attached.
+      - key: AUTH_DB_PATH
+        value: /tmp/roadlens-data/roadlens.sqlite3
+      - key: MEDIA_DIR
+        value: /tmp/roadlens-data/media
+      # Existing Blueprints do not prompt for new sync:false values. Configure
+      # these four values manually in the Render dashboard; never commit them.
+      - key: FIREBASE_PROJECT_ID
+        sync: false
+      - key: FIREBASE_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: ROADLENS_ADMIN_UIDS
+        sync: false
+      - key: ROADLENS_AUTHORITY_UIDS
+        sync: false
+      - key: ORT_INTRA_OP_THREADS
+        value: "1"
+      - key: ORT_INTER_OP_THREADS
+        value: "1"
+      - key: ORT_DISABLE_CPU_ARENA
+        value: "true"
+      - key: ORT_DISABLE_MEMORY_PATTERN
+        value: "true"
